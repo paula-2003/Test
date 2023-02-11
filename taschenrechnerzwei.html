@@ -25,6 +25,7 @@
             border: 1px solid grey;
             box-sizing: border-box;
             grid-area: display;
+            font-size: 2.5rem;
         }
 
         #numbers {
@@ -87,63 +88,82 @@
             <button onclick="displayValue('-')">-</button>
             <button onclick="displayValue('*')">*</button>
             <button onclick="displayValue('/')">/</button>
-            <button onclick="calculate()">=</button>
+            <button onclick="calculate('=')">=</button>
         </div>
     </div>
+
     <script>
 
-        const display = document.getElementById("display")
-
-
+        const display = document.getElementById("display");
 
         function displayValue(value) {
             console.log(display.innerText);
             display.innerText = display.innerText + value;
-
         }
 
         function calculate() {
             let text = display.innerText;
             const textArray = text.split("");
-            textArray.forEach((element, index) => {
-                console.log(element, index);
 
+            textArray.forEach((element, index, array, operator) => {
+                console.log(element, index, array);
 
-                if (element === "*" || element === "/") {
-                    console.log("juhu", index);
-
-                    multiplyOrDivide(element, index, array)
+                if (element === "*") {
+                    multiplyOrDivide(element, index, array, "multiply");
                 }
-                function multiplyOrDivide(element, index, array)
-                let i = index;
-                let j = 0;
-                let leftNumber = 0;
-
-
-
-                while (parseInt(array[i]) !== "NaN" && i > 0) {
-                    i = i - 1
-                    leftNumber = leftNumber + array[i] * 10 ** j;
-                    // j++;
-
+                else if (element === "/") {
+                    multiplyOrDivide(element, index, array, "divide");
                 }
-                let rightNumber = 0;
+                else {
+                    console.log("Irgendwas anderes");
+                }
 
+                // math operations
 
+                function multiplyOrDivide(element, index, array, operator) {
 
+                    let i = index;
+                    let j = 0;
+                    // check LeftElement
+                    let leftNumber = 0;
+                    while (parseInt(array[i]) !== "NaN" && i > 0) {
+                        i = i - 1;
 
+                        // array[i] * 10**j;
+                        leftNumber = leftNumber + array[i] * 10 ** j;
+                        console.log("Left", leftNumber);
+                        j++;
+                    }
+                    // check RightElement
+                    let rightNumber = "";
+                    a = index;
+                    while (parseInt(array[a]) !== "NaN" && a < array.length - 1) {
+                        a = a + 1;
 
+                        //array[i] * 10 ** j;
+                        rightNumber = rightNumber + array[a];
+                        console.log("Right", rightNumber);
+                        // j++;
 
+                    }
 
-
-            }
+                    switch (operator) {
+                        case "multiply":
+                            console.log(leftNumber * parseInt(rightNumber));
+                            break;
+                        case "divide":
+                            console.log(leftNumber / parseInt(rightNumber));
+                            break;
+                        default:
+                            console.log("no idea what to do");
+                            break;
+                    }
+                }
 
             });
 
 
-
-
-
+            // console.log(text);
 
         }
 
