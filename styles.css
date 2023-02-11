@@ -6,8 +6,8 @@
 
 body {
     height: 100vh;
-    display: flex;
-    background: #c30840;
+    background: rgb(26, 7, 148);
+    background: linear-gradient(0deg, rgba(26, 7, 148, 1) 31%, rgba(41, 218, 255, 1) 100%);
 }
 
 .memory-game {
@@ -16,8 +16,7 @@ body {
     margin: auto;
     display: flex;
     flex-wrap: wrap;
-    perspective: 1000px;
-    transform: translateY(-50px);
+
 }
 
 .memory-card {
@@ -65,4 +64,11 @@ body {
     transform: translate(-50%, -50%);
     text-align: center;
     font-size: 20px;
+}
+
+.header {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 20px;
 }
